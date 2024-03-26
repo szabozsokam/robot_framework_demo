@@ -19,6 +19,7 @@
 2. set result folder:
     add the following code into the main method of C:\Users\[user]\vscode\extensions\robocorp.robotframework-lsp-x.x.x\src\robotframework_debug_adapter\run_robot__main__.py:
 
+...
     from datetime import datetime
     datestring = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
     robot_args = args[3:]
@@ -31,6 +32,7 @@
         "--listener=robotframework_debug_adapter.listeners.DebugListenerV2",
 	"--outputdir=C:\Temp\RobotReports\"+datestring,
     ] + robot_args
+...
 
 3. VSC settings for python:
     1. set Interpreter to c:\Users\[user]\AppData\Local\Programs\Python\Python312\python.exe
