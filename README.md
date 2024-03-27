@@ -15,7 +15,7 @@
             - Pylance
             - Robocorp Code
             - Robot Framework Language Server
-    
+
 2. set result folder:
     add the following code into the main method of C:\Users\[user]\vscode\extensions\robocorp.robotframework-lsp-x.x.x\src\robotframework_debug_adapter\run_robot__main__.py:
 
@@ -60,3 +60,5 @@
 
 6. PyCharm settings:
        https://medium.com/geekculture/how-to-setup-robot-framework-for-test-automation-on-windows-2a9cc0da0763
+
+

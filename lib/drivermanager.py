@@ -13,5 +13,4 @@ def install_driver(browser):
         driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
         return driver
     else:
-        raise Exception("Invalid browser type!")   
-        
+        raise Exception("Invalid browser type!")
