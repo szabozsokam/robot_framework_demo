@@ -19,6 +19,8 @@
 2. set result folder:
     add the following code into the main method of C:\Users\[user]\vscode\extensions\robocorp.robotframework-lsp-x.x.x\src\robotframework_debug_adapter\run_robot__main__.py:
 
+...
+
     from datetime import datetime
     datestring = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
     robot_args = args[3:]
@@ -32,16 +34,18 @@
 	"--outputdir=C:\Temp\RobotReports\"+datestring,
     ] + robot_args
 
+...
+
 3. VSC settings for python:
     1. set Interpreter to c:\Users\[user]\AppData\Local\Programs\Python\Python312\python.exe
-    2. Settings -> Extensions -> Robocorp Code Languge Server Configuration -> Language-Server: Python: 
+    2. Settings -> Extensions -> Robocorp Code Languge Server Configuration -> Language-Server: Python:
             set the path to c:\Users\[user]\AppData\Local\Programs\Python\Python312\python.exe
-    3. Settings -> Extensions -> Robot Framework Languge Server Configuration -> Robot Language-Server: Python: 
+    3. Settings -> Extensions -> Robot Framework Languge Server Configuration -> Robot Language-Server: Python:
             set the path to c:\Users\[user]\AppData\Local\Programs\Python\Python312\python.exe
 
 4. VSC settings for drivermanager.py:
     1. run pip install webdriver-manager
-    2. Settings -> Extensions -> Robot Framework Languge Server Configuration -> Robot: Pythonpath: 
+    2. Settings -> Extensions -> Robot Framework Languge Server Configuration -> Robot: Pythonpath:
         "c:\\Users\\[user]\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\",
         "c:\\Users\\[user]\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\webdriver_manager\\",
         "c:\\Users\\[user]\\Repo\\robot_framework_demo\\lib\\drivermanager.py"
@@ -56,5 +60,3 @@
 
 6. PyCharm settings:
        https://medium.com/geekculture/how-to-setup-robot-framework-for-test-automation-on-windows-2a9cc0da0763
-
-    
