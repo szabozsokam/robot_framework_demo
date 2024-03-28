@@ -5,9 +5,11 @@ Library    SeleniumLibrary
 # Library    RPA.Desktop
 Library    ../lib/drivermanager.py
 
+
 *** Variables ***
 ${START_URL}    https://www.w3schools.com/python/
 ${BROWSER_TYPE}    chrome
+
 
 *** Keywords ***
 Start W3school Page
