@@ -8,8 +8,8 @@ Library    ../lib/drivermanager.py
 
 *** Variables ***
 ${START_URL}    https://www.w3schools.com/python/
-${BROWSER_TYPE}    chrome
-
+${BROWSER_TYPE}    edge
+# ${BROWSER_TYPE}    chrome
 
 *** Keywords ***
 Start W3school Page
@@ -25,10 +25,11 @@ Start W3school Page In Private Mode
     [Documentation]     Opens start url in Private mode of Edge
     ${driver}=    Install Driver    ${BROWSER_TYPE}
     IF    '${BROWSER_TYPE}'=='edge'
-        Open Browser    ${START_URL}    ${BROWSER_TYPE}    options=add_argument("--inprivate")
+        ${option}=    Set Variable    "--inprivate"
     ELSE IF    '${BROWSER_TYPE}'=='chrome'
-        Open Browser    ${START_URL}    ${BROWSER_TYPE}    options=add_argument("--incognito")
+        ${option}=    Set Variable    "--incognito"
     END
+    Open Browser    ${START_URL}    ${BROWSER_TYPE}    options=add_argument(${option})
     Maximize Browser Window
     Sleep    1s
 #    for slow display mode, activate the following:
