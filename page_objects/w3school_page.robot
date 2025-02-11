@@ -12,7 +12,7 @@ ${MENU_DICT}    xpath=//a[@href="python_dictionaries.asp"]
 ${MENU_DICT_METHODS}    xpath=//a[@href="python_dictionaries_methods.asp"]
 
 ${METHOD_TABLE}    xpath=//table[@class="ws-table-all notranslate"]
-${METHOD_KEYS_DISCRIPTION}    xpath=//a[normalize-space(text())="keys()"]/../following-sibling::td
+${METHOD_KEYS_DESC}    xpath=//a[normalize-space(text())="keys()"]/../following-sibling::td
 ${NEXT_EX_BTN}    xpath=//a[normalize-space(text())="Next ❯"][1]
 
 
@@ -37,7 +37,7 @@ Navigate To Dictionary Methods
 Check Dictionary Methods Table
     [Documentation]    Checks the content of the dictionary methods table
     Location Should Be    https://www.w3schools.com/python/python_dictionaries_methods.asp
-    Element Should Contain    ${METHOD_KEYS_DISCRIPTION}     Returns a list containing the dictionary's keys
+    Element Should Contain    ${METHOD_KEYS_DESC}     Returns a list containing the dictionary's keys
     ${method_get_description}    Get Table Cell    ${METHOD_TABLE}    5    2
     Should Be Equal As Strings    ${method_get_description}    Returns the value of the specified key
     Click Element    ${NEXT_EX_BTN}
