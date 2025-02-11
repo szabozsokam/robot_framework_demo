@@ -5,67 +5,54 @@ Resource    common_keywords.robot
 
 
 *** Variables ***
-${EXERCISE_1_IF}    name=ex1
+${EX_ADD_ITEMS}    id=xr_dictionaries_add
+${ANSWER_ADD}    xpath=//code[text()="add()"]
+${ANSWER_UPDATE}    xpath=//code[text()="update()"]
 ${SUBMIT_BTN}    xpath=//button[text()[contains(., "Submit Answer")]]
-${FEEDBACK_CORRECT}    xpath=//h2[normalize-space(text())="Correct!"]
-${NEXT_EXERCISE_BTN}    xpath=//button[text()[contains(., "Next Exercise")]]
-${EXERCISE_2_IF_1}    xpath=//pre[@id="assignmentcontainer"]/input[1]
-${EXERCISE_2_IF_2}    xpath=//pre[@id="assignmentcontainer"]/input[2]
-${FEEDBACK_NOT_CORRECT}    xpath=//h2[normalize-space(text())="Not Correct"]
-${BACK_LINK}    xpath=//u[text()="here"]
+${QUESTION}    id=qobj_question
+${FEEDBACK_NOT_CORRECT}    xpath=//h2[normalize-space(text())="Wrong Answer!"]
+${TRY_AGAIN_BTN}    xpath=//button[text()="Try Again"]
+${FEEDBACK_CORRECT}    xpath=//h2[normalize-space(text())="Correct Answer!"]
+${NEXT_BTN}   xpath=//button[@onclick="goto_next_question()"]
 ${SHOW_ANSWER_BTN}    xpath=//button[text()[contains(., "Show Answer")]]
-${IF_SHOWING_ANSWER}    xpath=//pre[@id="showcorrectanswercontainer"]/input[1]
+${IF_SHOWING_ANSWER}    xpath=//pre[@id="showcorrectanswercontainer"]/input[3]
 ${HIDE_ANSWER_BTN}    xpath=//button[text()[contains(., "Hide Answer")]]
-${shown_answer}    
 
 
 *** Keywords ***
 Solve Exercises
     [Documentation]    Checks exercise functions
-    Give Good Answer To Question 1
-    Give Bad Answer To Question 2
-    Check Answer Buttons
+    Give Bad Answer To Question
+    Give Good Answer To Question
+    Show And Hide Answer
 
-Give Good Answer To Question 1
+Give Bad Answer To Question
     [Documentation]    Solves Question 1 good and checks positive feedback
     Page Should Contain    Test Yourself With Exercises
-    Input Text    ${EXERCISE1_IF}    car.get("model")
+    Click Element    ${EX_ADD_ITEMS}
+    ${window_handles}=    Get Window Handles
+    Switch Window    ${window_handles}[1]
+    Wait Until Element Is Visible    ${QUESTION}
+    Click Element    ${ANSWER_ADD}
     Click Element    ${SUBMIT_BTN}
-    Switch Window    NEW
-    Wait Until Location Is    https://www.w3schools.com/python/exercise.asp?filename=exercise_dictionaries1
+    Element Should Be Visible    ${FEEDBACK_NOT_CORRECT}
+    Click Element    ${TRY_AGAIN_BTN}
+
+Give Good Answer To Question
+   [Documentation]    Solves Question 2 bad and checks negative feedback
+    Wait Until Element Is Visible    ${QUESTION}
+    Click Element    ${ANSWER_UPDATE}
     Click Element    ${SUBMIT_BTN}
     Element Should Be Visible    ${FEEDBACK_CORRECT}
-    Click Element    ${NEXT_EXERCISE_BTN}
+    Click Element    ${NEXT_BTN}
 
-Give Bad Answer To Question 2
-   [Documentation]    Solves Question 2 bad and checks negative feedback
-   Wait Until Element Is Visible    ${EXERCISE_2_IF_1}
-   Input Text    ${EXERCISE_2_IF_1}    car.year
-   Input Text    ${EXERCISE_2_IF_2}    2020
-   Click Element    ${SUBMIT_BTN}
-   Element Should Be Visible    ${FEEDBACK_NOT_CORRECT}
-   Click Element    ${BACK_LINK}
-
-Check Answer Buttons
-   Show Answer And Copy
-   # Paste Shown Answer And Submit
-   Close And Switch Window
-
-Show Answer And Copy
+Show And Hide Answer
    [Documentation]     Show and hide answer for questions
    Wait Until Element Is Visible    ${SHOW_ANSWER_BTN}
    Click Element    ${SHOW_ANSWER_BTN}
-   Double Click Element    ${IF_SHOWING_ANSWER}
-   Open Context Menu    ${IF_SHOWING_ANSWER}
-   Sleep    1s    waiting for right click menu
-   Press Keys    ${None}    ARROW_DOWN    RETURN 
-   # Wait Until Element Is Visible   ${HIDE_ANSWER_BTN}
-   # Click Element    ${HIDE_ANSWER_BTN}
-
-Paste Shown Answer And Submit
-   [Documentation]    Paste copied answer into input field and submit
-   Click Element    ${EXERCISE_2_IF_1}
-   Input Text    ${EXERCISE_2_IF_1}    ${shown_answer}
-   Input Text    ${EXERCISE_2_IF_2}    2020
-   Click Element    ${SUBMIT_BTN}
-   Element Should Be Visible    ${FEEDBACK_CORRECT}
+   ${shown_answer}=    Get Value    ${IF_SHOWING_ANSWER}
+   Should Be Equal    ${shown_answer}    "red"
+   Wait Until Element Is Visible   ${HIDE_ANSWER_BTN}
+   Click Element    ${HIDE_ANSWER_BTN}
+   Close And Switch Window
+   Element Should Be Visible    ${EX_ADD_ITEMS}

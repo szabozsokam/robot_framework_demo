@@ -8,12 +8,12 @@ Resource    exercises_page.robot
 *** Variables ***
 ${ACCEPT_COOKIES_BTN}    id=accept-choices
 
-${MENU_DICT}    xpath=//a[text()[contains(., "Python Dictionaries")]]
-${MENU_DICT_METHODS}    xpath=//div[@class="tut_overview overview_body"]/a[text()[contains(.., "Dictionary Methods")]]
+${MENU_DICT}    xpath=//a[@href="python_dictionaries.asp"]
+${MENU_DICT_METHODS}    xpath=//a[@href="python_dictionaries_methods.asp"]
 
 ${METHOD_TABLE}    xpath=//table[@class="ws-table-all notranslate"]
 ${METHOD_KEYS_DISCRIPTION}    xpath=//a[normalize-space(text())="keys()"]/../following-sibling::td
-${NEXT_BTN}    xpath=//a[normalize-space(text())="Next ❯"][1]
+${NEXT_EX_BTN}    xpath=//a[normalize-space(text())="Next ❯"][1]
 
 
 *** Keywords ***
@@ -40,6 +40,6 @@ Check Dictionary Methods Table
     Element Should Contain    ${METHOD_KEYS_DISCRIPTION}     Returns a list containing the dictionary's keys
     ${method_get_description}    Get Table Cell    ${METHOD_TABLE}    5    2
     Should Be Equal As Strings    ${method_get_description}    Returns the value of the specified key
-    Click Element    ${NEXT_BTN}
+    Click Element    ${NEXT_EX_BTN}
     
 
